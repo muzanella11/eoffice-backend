@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.24)
 # Database: eoffice
-# Generation Time: 2019-03-28 09:25:43 +0000
+# Generation Time: 2019-03-28 15:36:04 +0000
 # ************************************************************
 
 
@@ -28,8 +28,7 @@ DROP TABLE IF EXISTS `attendance`;
 CREATE TABLE `attendance` (
   `id` int(100) unsigned NOT NULL AUTO_INCREMENT,
   `signin_date` datetime DEFAULT NULL,
-  `signout_date` datetime DEFAULT NULL,
-  `status` int(20) DEFAULT NULL,
+  `user_id` int(100) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -46,6 +45,21 @@ CREATE TABLE `division` (
   `id` int(100) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+# Dump of table file_upload
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `file_upload`;
+
+CREATE TABLE `file_upload` (
+  `id` int(100) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
