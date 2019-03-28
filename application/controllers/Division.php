@@ -8,7 +8,7 @@ require APPPATH . '/libraries/PdfManagement.php';
 
 use Carbon\Carbon;
 
-class User extends RestManager {
+class Division extends RestManager {
     function __construct () 
     {
         // Construct the parent class
@@ -31,8 +31,8 @@ class User extends RestManager {
 
         $dataModel = [
             [
-                'className' => 'User',
-                'modelName' => 'UserModel',
+                'className' => 'Division',
+                'modelName' => 'DivisionModel',
                 'filter' => '',
                 'filterKey' => '',
                 'limit' => [
@@ -95,8 +95,8 @@ class User extends RestManager {
 
         $dataModel = [
             [
-                'className' => 'User',
-                'modelName' => 'UserModel',
+                'className' => 'Division',
+                'modelName' => 'DivisionModel',
                 'filter' => '',
                 'filterKey' => '',
                 'limit' => [
@@ -104,15 +104,8 @@ class User extends RestManager {
                     'limitData' => 10000
                 ],
                 'dataMaster' => [
-					'id_division' => $this->post('divisionId'),
-					'id_role' => $this->post('roleId'),
 					'name' => $this->post('name'),
-					'email' => $this->post('email'),
-					'phone' => $this->post('phone'),
-					'avatar' => $this->post('avatar'),
-					'username' => $this->post('username'),
-					'password' => $this->post('password'),
-					'join_date' => $this->post('joinDate')
+					'description' => $this->post('description')
                 ]
             ]
 		];
@@ -137,15 +130,8 @@ class User extends RestManager {
 		];
 		
 		$dataMaster = [
-			'id_division' => $this->put('divisionId'),
-			'id_role' => $this->put('roleId'),
 			'name' => $this->put('name'),
-			'email' => $this->put('email'),
-			'phone' => $this->put('phone'),
-			'avatar' => $this->put('avatar'),
-			'username' => $this->put('username'),
-			'password' => $this->put('password'),
-			'join_date' => $this->put('joinDate')
+			'description' => $this->put('description')
 		];
 
 		foreach($dataMaster as $key => $value) {
@@ -154,8 +140,8 @@ class User extends RestManager {
 
         $dataModel = [
             [
-                'className' => 'User',
-                'modelName' => 'UserModel',
+                'className' => 'Division',
+                'modelName' => 'DivisionModel',
                 'filter' => '',
                 'filterKey' => '',
                 'limit' => [
@@ -186,8 +172,8 @@ class User extends RestManager {
 
         $dataModel = [
             [
-                'className' => 'User',
-                'modelName' => 'UserModel',
+                'className' => 'Division',
+                'modelName' => 'DivisionModel',
                 'fieldName' => 'id'
             ]
         ];
@@ -214,8 +200,8 @@ class User extends RestManager {
 
         $dataModel = [
             [
-                'className' => 'User',
-                'modelName' => 'UserModel',
+                'className' => 'Division',
+                'modelName' => 'DivisionModel',
                 'filter' => 'create_sql',
                 'filterKey' => '',
                 'limit' => '',
@@ -244,17 +230,17 @@ class User extends RestManager {
                     'name' => 'Travlr'
                 ]
             ],
-            'titleContent' => 'Laporan Data User',
+            'titleContent' => 'Laporan Data Division',
             'dateMail' => 'Bali, '.$dateNow->format('d F Y'),
             'contentMain' => $dataContentMain,
-            'tableName' => 'User',
+            'tableName' => 'Division',
             'contentTable' => $dataTable,
             'footerConfig' => []
         ];
         $view = $this->load->view('mails/templates/DataReport', $dataView, true);
         $configPdf = [
             'setFooterPageNumber' => True,
-            'title' => 'Laporan Data User',
+            'title' => 'Laporan Data Division',
             // 'withBreak' => true,
             'html' => [
                 $view                
@@ -277,7 +263,7 @@ class User extends RestManager {
     {
         $data = [
             'status' => 'Ok',
-            'messages' => 'Hello guys post user :)'
+            'messages' => 'Hello guys post division :)'
         ];
         
         return $this->set_response($data, REST_Controller::HTTP_OK);
