@@ -9,16 +9,37 @@
 
 ?>
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-    class RoleModel extends MY_Model {
-        private $tableName = 'user_role';
+    class UserModel extends MY_Model {
+        private $tableName = 'user';
 
         function __construct(){
             parent::__construct();
         }
 
-        function addDataRole ($data) {
-            $sql    =   "INSERT INTO {$this->tableName} (name, description, created_at)
-                            VALUES('".$data['name']."', '".$data['description']."', now())";
+        function addDataUser ($data) {
+            $sql    =   "INSERT INTO {$this->tableName} (
+				id_division,
+				id_role,
+				name,
+				email,
+				phone,
+				avatar,
+				username,
+				password,
+				join_date,
+				created_at
+			) VALUES (
+				'".$data['id_division']."',
+				'".$data['id_role']."',
+				'".$data['name']."',
+				'".$data['email']."',
+				'".$data['phone']."',
+				'".$data['avatar']."',
+				'".$data['username']."',
+				'".$data['password']."',
+				'".$data['join_date']."',
+				now()
+			)";
             
             $query  =   $this->db->query($sql);
             $latestId = $this->db->insert_id();
@@ -48,7 +69,7 @@
             }
         }
 
-        function getDataRole ($filter = NULL, $filter_key = NULL, $limit = NULL, $field_target = NULL) {
+        function getDataUser ($filter = NULL, $filter_key = NULL, $limit = NULL, $field_target = NULL) {
             if(!empty($filter) && !empty($filter_key)) {
                 if($filter === 'id') {
                     if(is_array($limit)) {
@@ -81,7 +102,7 @@
                 } else {
                     $sql    =   "SELECT * FROM {$this->tableName}";
                 }
-            }
+			}
 
             $query  =   $this->db->query($sql);
             $getError = $this->db->error();
@@ -93,7 +114,7 @@
             }
         }
 
-        function updateDataRole ($data, $findByValue = '') {
+        function updateDataUser ($data, $findByValue = '') {
 			$findBy = 'id';
             $query = [];
             foreach ($data as $key => $value) {
@@ -103,7 +124,7 @@
                 }
 			}
 
-            $queryResult = implode(',', $query);
+			$queryResult = implode(',', $query);			
 
             if (!$queryResult)
             {
@@ -113,9 +134,9 @@
                 ];
             }
             
-            $sql    =   "UPDATE {$this->tableName} SET ".$queryResult.", updated_at=now() WHERE ".$findBy."={$findByValue}";
-            
-            $query  =   $this->db->query($sql);
+			$sql    =   "UPDATE {$this->tableName} SET ".$queryResult.", updated_at=now() WHERE ".$findBy."={$findByValue}";
+
+			$query  =   $this->db->query($sql);
             $getError = $this->db->error();
 
             if (!$getError['message']) {
@@ -131,7 +152,7 @@
             }
         }
 
-        function deleteDataRole ($field_name, $field_value) {
+        function deleteDataUser ($field_name, $field_value) {
             $sql    =   "DELETE FROM {$this->tableName} WHERE ".$field_name." = '".$field_value."'";
             
             $query  =   $this->db->query($sql);

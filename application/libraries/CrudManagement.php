@@ -210,8 +210,8 @@ class CrudManagement {
                 }
                 else if ($isEditOrDelete === 'edit')
                 {
-                    $data = $this->CI->{$value['modelName']}->{$value['methodName']}($value['dataMaster'], 'user_id', $getCatOrId);
-                    $flag = $data['flag'];
+					$data = $this->CI->{$value['modelName']}->{$value['methodName']}($value['dataMaster'], $getCatOrId);
+					$flag = $data['flag'];
                 }
                 else if ($isEditOrDelete === 'delete')
                 {
