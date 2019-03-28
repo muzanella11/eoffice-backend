@@ -93,17 +93,15 @@
             }
         }
 
-        function updateDataRole($data, $findBy = '', $findByValue = '') {
-            $name = "name='".$data['name']."'";
-            $description = "description='".$data['description']."'";
-            $findBy = 'id';
-
+        function updateDataRole ($data, $findByValue = '') {
+			$findBy = 'id';
             $query = [];
             foreach ($data as $key => $value) {
-                if (isset(${$key}) && $value) {
-                    array_push($query, ${$key});
+				if (isset($key) && $value) {
+					$queryVal = $key . ' = "'.$value.'"';
+                    array_push($query, $queryVal);
                 }
-            }
+			}
 
             $queryResult = implode(',', $query);
 
@@ -115,7 +113,7 @@
                 ];
             }
             
-            $sql    =   "UPDATE {$this->tableName} SET ".$queryResult.", updated_at=now() WHERE ".$findBy."='".$findByValue."'";
+            $sql    =   "UPDATE {$this->tableName} SET ".$queryResult.", updated_at=now() WHERE ".$findBy."={$findByValue}";
             
             $query  =   $this->db->query($sql);
             $getError = $this->db->error();
@@ -133,7 +131,7 @@
             }
         }
 
-        function deleteDataRole($field_name, $field_value) {
+        function deleteDataRole ($field_name, $field_value) {
             $sql    =   "DELETE FROM {$this->tableName} WHERE ".$field_name." = '".$field_value."'";
             
             $query  =   $this->db->query($sql);
